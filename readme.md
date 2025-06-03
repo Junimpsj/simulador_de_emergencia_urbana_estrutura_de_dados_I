@@ -56,7 +56,6 @@ O sistema foi projetado para demonstrar a aplicação prática de estruturas de 
 - **Arquitetura:** Modular (header/implementação/interface)
 
 ## 📁 Estrutura do Projeto
-
 📦 emergency-simulator/
 ├── 📄 main.c           # Interface principal e fluxo do programa
 ├── 📄 emergencia.h     # Definições de estruturas e protótipos
