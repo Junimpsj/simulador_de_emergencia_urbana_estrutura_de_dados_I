@@ -1,7 +1,7 @@
 #include "emergencia.h"
 
 int main() {
-    // Aqui inicializamos o sistema, caso não incialize temos um erro crítico
+    // Aqui inicializamos o sistema, caso não inicialize temos um erro crítico
     SistemaEmergencia* sistema = inicializar_sistema();
     if (!sistema) {
         printf("Erro na inicialização do sistema\n");
@@ -15,9 +15,9 @@ int main() {
     do {
         exibir_menu_principal();
         
-        //Lê a opção do usuário para utilização do sistema
-        //Temos um while que permite realizar várias consultas diferentes enquanto quisermos
-        //E um switch com as opções existentes
+        // Lê a opção do usuário para utilização do sistema
+        // Temos um while que permite realizar várias consultas diferentes enquanto quisermos
+        // E um switch com as opções existentes (agora expandido para Fase 2)
         while (scanf("%d", &opcao) != 1) {
             printf("Entrada inválida! Digite um número: ");
             limpar_buffer();
@@ -37,6 +37,10 @@ int main() {
                 menu_configuracao(sistema);
                 break;
                 
+            case 4:
+                menu_consultas(sistema);
+                break;
+                
             case 0:
                 printf("\n=== ENCERRANDO O SISTEMA ===\n");
                 printf("Liberando memória...\n");
@@ -49,7 +53,7 @@ int main() {
         
     } while(opcao != 0);
     
-    //Função para liberar toda a memória alocada no sistema
+    // Função para liberar toda a memória alocada no sistema 
     liberar_sistema(sistema);
     
     printf("\nSistema finalizado com sucesso!\n");
