@@ -110,7 +110,33 @@ typedef struct {
     NoBairroServico* primeiro;
 } ListaCruzada;
 
-// ==================== STRUCTS SISTEMA PRINCIPAL ATUALIZADO ====================
+// ==================== STRUCTS ÁRVORE BST ====================
+typedef struct NoArvoreBST {
+    Ocorrencia* ocorrencia;
+    struct NoArvoreBST* esquerda;
+    struct NoArvoreBST* direita;
+} NoArvoreBST;
+
+typedef struct {
+    NoArvoreBST* raiz;
+    int tamanho;
+} ArvoreBST;
+
+// ==================== STRUCTS ÁRVORE AVL ====================
+typedef struct NoArvoreAVL {
+    Ocorrencia* ocorrencia;
+    int altura;
+    int fator_balanceamento;
+    struct NoArvoreAVL* esquerda;
+    struct NoArvoreAVL* direita;
+} NoArvoreAVL;
+
+typedef struct {
+    NoArvoreAVL* raiz;
+    int tamanho;
+} ArvoreAVL;
+
+// ==================== STRUCTS SISTEMA PRINCIPAL ATUALIZADO====================
 typedef struct {
     TabelaHashBairros* bairros;
     TabelaHashCidadaos* cidadaos;
@@ -122,6 +148,8 @@ typedef struct {
     Fila* fila_ambulancia;
     Fila* fila_bombeiro;
     Fila* fila_policia;
+    ArvoreBST* arvore_ocorrencias; 
+    ArvoreAVL* arvore_prioridades;
     int tempo_atual;
     int proximo_id_ocorrencia;
 } SistemaEmergencia;
@@ -163,6 +191,43 @@ int atualizar_unidades_disponiveis(ListaCruzada* lista, int bairro_id, TipoServi
 void mostrar_mapa_cidade(ListaCruzada* lista);
 void liberar_lista_cruzada(ListaCruzada* lista);
 
+// ==================== FUNÇÕES ÁRVORE BST ====================
+ArvoreBST* criar_arvore_bst();
+NoArvoreBST* criar_no_bst(Ocorrencia* ocorrencia);
+int inserir_bst(ArvoreBST* arvore, Ocorrencia* ocorrencia);
+NoArvoreBST* buscar_bst(ArvoreBST* arvore, int id);
+Ocorrencia* buscar_ocorrencia_por_id(ArvoreBST* arvore, int id);
+void percorrer_em_ordem_bst(NoArvoreBST* no);
+void percorrer_pre_ordem_bst(NoArvoreBST* no);
+void percorrer_pos_ordem_bst(NoArvoreBST* no);
+void mostrar_arvore_bst(ArvoreBST* arvore);
+void mostrar_arvore_ordenada_por_id(ArvoreBST* arvore);
+void mostrar_arvore_ordenada_por_tempo(ArvoreBST* arvore);
+NoArvoreBST* remover_bst(NoArvoreBST* no, int id);
+int remover_ocorrencia_bst(ArvoreBST* arvore, int id);
+void liberar_arvore_bst(NoArvoreBST* no);
+void liberar_bst_completa(ArvoreBST* arvore);
+
+// ==================== FUNÇÕES ÁRVORE AVL ====================
+ArvoreAVL* criar_arvore_avl();
+NoArvoreAVL* criar_no_avl(Ocorrencia* ocorrencia);
+int altura_avl(NoArvoreAVL* no);
+int fator_balanceamento_avl(NoArvoreAVL* no);
+int max_int(int a, int b);
+NoArvoreAVL* rotacao_direita(NoArvoreAVL* y);
+NoArvoreAVL* rotacao_esquerda(NoArvoreAVL* x);
+NoArvoreAVL* inserir_avl(NoArvoreAVL* no, Ocorrencia* ocorrencia);
+int inserir_avl_arvore(ArvoreAVL* arvore, Ocorrencia* ocorrencia);
+NoArvoreAVL* buscar_avl(NoArvoreAVL* no, int gravidade);
+Ocorrencia* buscar_por_gravidade(ArvoreAVL* arvore, int gravidade);
+void percorrer_por_prioridade(NoArvoreAVL* no);
+void mostrar_arvore_avl(ArvoreAVL* arvore);
+void mostrar_ocorrencias_por_prioridade(ArvoreAVL* arvore);
+NoArvoreAVL* remover_avl(NoArvoreAVL* no, int gravidade, int id);
+int remover_ocorrencia_avl(ArvoreAVL* arvore, int gravidade, int id);
+void liberar_arvore_avl(NoArvoreAVL* no);
+void liberar_avl_completa(ArvoreAVL* arvore);
+
 // ==================== FUNÇÕES UNIDADES DE SERVIÇO ====================
 UnidadeServico* criar_unidade(int id, TipoServico tipo, const char* identificacao);
 int inserir_unidade(UnidadeServico** lista, int id, TipoServico tipo, const char* identificacao);
@@ -198,6 +263,7 @@ void liberar_sistema(SistemaEmergencia* sistema);
 void exibir_menu_principal();
 void menu_configuracao(SistemaEmergencia* sistema);
 void menu_consultas(SistemaEmergencia* sistema);
+void menu_arvores(SistemaEmergencia* sistema);
 void iniciar_simulacao(SistemaEmergencia* sistema);
 void verificar_dados(SistemaEmergencia* sistema);
 

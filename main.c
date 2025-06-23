@@ -17,7 +17,7 @@ int main() {
         
         // Lê a opção do usuário para utilização do sistema
         // Temos um while que permite realizar várias consultas diferentes enquanto quisermos
-        // E um switch com as opções existentes (agora expandido para Fase 2)
+        // E um switch com as opções existentes (agora expandido para Fase 3)
         while (scanf("%d", &opcao) != 1) {
             printf("Entrada inválida! Digite um número: ");
             limpar_buffer();
@@ -41,9 +41,13 @@ int main() {
                 menu_consultas(sistema);
                 break;
                 
+            case 5:
+                menu_arvores(sistema);
+                break;
+                
             case 0:
                 printf("\n=== ENCERRANDO O SISTEMA ===\n");
-                printf("Liberando memória...\n");
+                printf("Liberando memória de todas as estruturas...\n");
                 break;
                 
             default:
@@ -53,7 +57,7 @@ int main() {
         
     } while(opcao != 0);
     
-    // Função para liberar toda a memória alocada no sistema 
+    // Função para liberar toda a memória alocada no sistema (agora inclui árvores)
     liberar_sistema(sistema);
     
     printf("\nSistema finalizado com sucesso!\n");
