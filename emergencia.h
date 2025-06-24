@@ -75,7 +75,7 @@ typedef struct Ocorrencia {
     int id;
     int bairro_id;
     TipoServico tipo_servico;
-    int gravidade; // 1 para baixa, 2 para média, 3 para alta
+    int gravidade; //1 para baixa, 2 para média, 3 para alta
     int tempo_chegada; //Unidade de tempo
     struct Ocorrencia* prox;
 } Ocorrencia;

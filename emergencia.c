@@ -3,17 +3,17 @@
 
 // ==================== IMPLEMENTAÇÃO - HASH/BAIRROS ====================
 
-// Função hash simples para IDs de bairros
+//Função hash simples para IDs de bairros
 int hash_bairro(int id) {
     return id % TAM_HASH;
 }
 
-// Cria uma nova tabela hash para bairros
+//Cria uma nova tabela hash para bairros
 TabelaHashBairros* criar_tabela_bairros() {
     TabelaHashBairros* tabela = (TabelaHashBairros*)malloc(sizeof(TabelaHashBairros));
     if (!tabela) return NULL;
     
-    // Inicializa todas as posições como NULL
+    //Inicializa todas as posições como NULL
     for (int i = 0; i < TAM_HASH; i++) {
         tabela->tabela[i] = NULL;
     }
@@ -21,11 +21,11 @@ TabelaHashBairros* criar_tabela_bairros() {
     return tabela;
 }
 
-// Insere um bairro na tabela hash
+//Insere um bairro na tabela hash
 int inserir_bairro(TabelaHashBairros* tabela, int id, const char* nome) {
     if (!tabela || !nome) return 0;
     
-    // Verifica se já existe
+    //Verifica se já existe
     if (buscar_bairro(tabela, id)) return 0;
     
     int indice = hash_bairro(id);
@@ -34,13 +34,13 @@ int inserir_bairro(TabelaHashBairros* tabela, int id, const char* nome) {
     
     novo->id = id;
     strcpy(novo->nome, nome);
-    novo->prox = tabela->tabela[indice];  // Encadeamento para tratar colisões
+    novo->prox = tabela->tabela[indice];  //Encadeamento para tratar colisões
     tabela->tabela[indice] = novo;
     
     return 1;
 }
 
-// Busca um bairro pelo ID
+//Busca um bairro pelo ID
 Bairro* buscar_bairro(TabelaHashBairros* tabela, int id) {
     if (!tabela) return NULL;
     
@@ -55,7 +55,7 @@ Bairro* buscar_bairro(TabelaHashBairros* tabela, int id) {
     return NULL;
 }
 
-// Lista todos os bairros cadastrados
+//Lista todos os bairros cadastrados
 void listar_bairros(TabelaHashBairros* tabela) {
     if (!tabela) return;
     
@@ -74,7 +74,7 @@ void listar_bairros(TabelaHashBairros* tabela) {
     }
 }
 
-// Remove um bairro da tabela hash
+//Remove um bairro da tabela hash
 int remover_bairro(TabelaHashBairros* tabela, int id) {
     if (!tabela) return 0;
     
@@ -99,7 +99,7 @@ int remover_bairro(TabelaHashBairros* tabela, int id) {
     return 0;
 }
 
-// Libera memória da tabela de bairros
+//Libera memória da tabela de bairros
 void liberar_tabela_bairros(TabelaHashBairros* tabela) {
     if (!tabela) return;
     
@@ -116,7 +116,7 @@ void liberar_tabela_bairros(TabelaHashBairros* tabela) {
 
 // ==================== IMPLEMENTAÇÃO - HASH/CIDADÃOS ====================
 
-// Função hash para CPF
+//Função hash para CPF
 int hash_cpf(const char* cpf) {
     if (!cpf) return 0;
     int hash = 0;
@@ -128,7 +128,7 @@ int hash_cpf(const char* cpf) {
     return hash;
 }
 
-// Cria uma nova tabela hash para cidadãos
+//Cria uma nova tabela hash para cidadãos
 TabelaHashCidadaos* criar_tabela_cidadaos() {
     TabelaHashCidadaos* tabela = (TabelaHashCidadaos*)malloc(sizeof(TabelaHashCidadaos));
     if (!tabela) return NULL;
@@ -140,12 +140,12 @@ TabelaHashCidadaos* criar_tabela_cidadaos() {
     return tabela;
 }
 
-// Insere um cidadão na tabela hash
+//Insere um cidadão na tabela hash
 int inserir_cidadao(TabelaHashCidadaos* tabela, const char* cpf, const char* nome, 
                    const char* email, const char* endereco, int bairro_id) {
     if (!tabela || !cpf || !nome || !email || !endereco) return 0;
     
-    // Verifica se já existe
+    //Verifica se já existe
     if (buscar_cidadao(tabela, cpf)) return 0;
     
     int indice = hash_cpf(cpf);
@@ -163,7 +163,7 @@ int inserir_cidadao(TabelaHashCidadaos* tabela, const char* cpf, const char* nom
     return 1;
 }
 
-// Busca um cidadão pelo CPF
+//Busca um cidadão pelo CPF
 Cidadao* buscar_cidadao(TabelaHashCidadaos* tabela, const char* cpf) {
     if (!tabela || !cpf) return NULL;
     
@@ -178,7 +178,7 @@ Cidadao* buscar_cidadao(TabelaHashCidadaos* tabela, const char* cpf) {
     return NULL;
 }
 
-// Lista todos os cidadãos cadastrados
+//Lista todos os cidadãos cadastrados
 void listar_cidadaos(TabelaHashCidadaos* tabela) {
     if (!tabela) return;
     
@@ -198,7 +198,7 @@ void listar_cidadaos(TabelaHashCidadaos* tabela) {
     }
 }
 
-// Remove um cidadão da tabela hash
+//Remove um cidadão da tabela hash
 int remover_cidadao(TabelaHashCidadaos* tabela, const char* cpf) {
     if (!tabela || !cpf) return 0;
     
@@ -223,7 +223,7 @@ int remover_cidadao(TabelaHashCidadaos* tabela, const char* cpf) {
     return 0;
 }
 
-// Libera memória da tabela de cidadãos
+//Libera memória da tabela de cidadãos
 void liberar_tabela_cidadaos(TabelaHashCidadaos* tabela) {
     if (!tabela) return;
     
@@ -240,7 +240,7 @@ void liberar_tabela_cidadaos(TabelaHashCidadaos* tabela) {
 
 // ==================== IMPLEMENTAÇÃO - PILHAS DE HISTÓRICO ====================
 
-// Cria uma nova pilha de histórico
+//Cria uma nova pilha de histórico
 PilhaHistorico* criar_pilha_historico() {
     PilhaHistorico* pilha = (PilhaHistorico*)malloc(sizeof(PilhaHistorico));
     if (!pilha) return NULL;
@@ -251,12 +251,12 @@ PilhaHistorico* criar_pilha_historico() {
     return pilha;
 }
 
-// Verifica se a pilha está vazia
+//Verifica se a pilha está vazia
 int pilha_vazia(PilhaHistorico* pilha) {
     return pilha == NULL || pilha->topo == NULL;
 }
 
-// Empilha um novo histórico de atendimento
+//Empilha um novo histórico de atendimento
 void empilhar_historico(PilhaHistorico* pilha, int ocorrencia_id, int bairro_id, 
                        TipoServico tipo, int gravidade, int tempo_inicio, 
                        int tempo_fim, const char* observacoes) {
@@ -278,7 +278,7 @@ void empilhar_historico(PilhaHistorico* pilha, int ocorrencia_id, int bairro_id,
     pilha->tamanho++;
 }
 
-// Desempilha um histórico de atendimento
+//Desempilha um histórico de atendimento
 HistoricoAtendimento* desempilhar_historico(PilhaHistorico* pilha) {
     if (pilha_vazia(pilha)) return NULL;
     
@@ -289,7 +289,7 @@ HistoricoAtendimento* desempilhar_historico(PilhaHistorico* pilha) {
     return temp;
 }
 
-// Mostra o histórico completo (sem remover)
+//Mostra o histórico completo (sem remover)
 void mostrar_historico(PilhaHistorico* pilha) {
     if (pilha_vazia(pilha)) {
         printf("Histórico vazio\n");
@@ -310,7 +310,7 @@ void mostrar_historico(PilhaHistorico* pilha) {
     }
 }
 
-// Libera memória da pilha de histórico
+//Libera memória da pilha de histórico
 void liberar_pilha_historico(PilhaHistorico* pilha) {
     if (!pilha) return;
     
@@ -323,7 +323,7 @@ void liberar_pilha_historico(PilhaHistorico* pilha) {
 
 // ==================== IMPLEMENTAÇÃO - LISTAS CRUZADAS ====================
 
-// Cria uma nova lista cruzada
+//Cria uma nova lista cruzada
 ListaCruzada* criar_lista_cruzada() {
     ListaCruzada* lista = (ListaCruzada*)malloc(sizeof(ListaCruzada));
     if (!lista) return NULL;
@@ -332,11 +332,11 @@ ListaCruzada* criar_lista_cruzada() {
     return lista;
 }
 
-// Insere um bairro na lista cruzada
+//Insere um bairro na lista cruzada
 int inserir_bairro_servico(ListaCruzada* lista, int bairro_id, const char* nome_bairro) {
     if (!lista || !nome_bairro) return 0;
     
-    // Verifica se já existe
+    //Verifica se já existe
     NoBairroServico* atual = lista->primeiro;
     while (atual) {
         if (atual->bairro_id == bairro_id) return 0;
@@ -355,11 +355,11 @@ int inserir_bairro_servico(ListaCruzada* lista, int bairro_id, const char* nome_
     return 1;
 }
 
-// Adiciona um serviço a um bairro
+//Adiciona um serviço a um bairro
 int adicionar_servico_bairro(ListaCruzada* lista, int bairro_id, TipoServico tipo) {
     if (!lista) return 0;
     
-    // Busca o bairro
+    //Busca o bairro
     NoBairroServico* bairro = lista->primeiro;
     while (bairro && bairro->bairro_id != bairro_id) {
         bairro = bairro->prox_bairro;
@@ -367,7 +367,7 @@ int adicionar_servico_bairro(ListaCruzada* lista, int bairro_id, TipoServico tip
     
     if (!bairro) return 0;
     
-    // Verifica se o serviço já existe
+    //Verifica se o serviço já existe
     NoServico* servico = bairro->servicos;
     while (servico) {
         if (servico->tipo == tipo) {
@@ -377,7 +377,7 @@ int adicionar_servico_bairro(ListaCruzada* lista, int bairro_id, TipoServico tip
         servico = servico->prox_servico;
     }
     
-    // Cria novo serviço
+    //Cria novo serviço
     NoServico* novo_servico = (NoServico*)malloc(sizeof(NoServico));
     if (!novo_servico) return 0;
     
@@ -389,7 +389,7 @@ int adicionar_servico_bairro(ListaCruzada* lista, int bairro_id, TipoServico tip
     return 1;
 }
 
-// Atualiza número de unidades disponíveis
+//Atualiza número de unidades disponíveis
 int atualizar_unidades_disponiveis(ListaCruzada* lista, int bairro_id, TipoServico tipo, int delta) {
     if (!lista) return 0;
     
@@ -415,7 +415,7 @@ int atualizar_unidades_disponiveis(ListaCruzada* lista, int bairro_id, TipoServi
     return 0;
 }
 
-// Mostra o mapa da cidade com serviços
+//Mostra o mapa da cidade com serviços
 void mostrar_mapa_cidade(ListaCruzada* lista) {
     if (!lista || !lista->primeiro) {
         printf("Mapa da cidade vazio\n");
@@ -426,14 +426,14 @@ void mostrar_mapa_cidade(ListaCruzada* lista) {
     NoBairroServico* bairro = lista->primeiro;
     
     while (bairro) {
-        printf("🏙️  Bairro: %s (ID: %d)\n", bairro->nome_bairro, bairro->bairro_id);
+        printf("Bairro: %s (ID: %d)\n", bairro->nome_bairro, bairro->bairro_id);
         
         if (!bairro->servicos) {
-            printf("   ❌ Nenhum serviço disponível\n");
+            printf("Nenhum serviço disponível\n");
         } else {
             NoServico* servico = bairro->servicos;
             while (servico) {
-                printf("   ✅ %s: %d unidades disponíveis\n", 
+                printf("%s: %d unidades disponíveis\n", 
                        tipo_servico_string(servico->tipo), 
                        servico->unidades_disponiveis);
                 servico = servico->prox_servico;
@@ -445,7 +445,7 @@ void mostrar_mapa_cidade(ListaCruzada* lista) {
     }
 }
 
-// Libera memória da lista cruzada
+//Libera memória da lista cruzada
 void liberar_lista_cruzada(ListaCruzada* lista) {
     if (!lista) return;
     
@@ -453,7 +453,7 @@ void liberar_lista_cruzada(ListaCruzada* lista) {
         NoBairroServico* bairro_temp = lista->primeiro;
         lista->primeiro = lista->primeiro->prox_bairro;
         
-        // Libera serviços do bairro
+        //Libera serviços do bairro
         while (bairro_temp->servicos) {
             NoServico* servico_temp = bairro_temp->servicos;
             bairro_temp->servicos = bairro_temp->servicos->prox_servico;
@@ -468,7 +468,7 @@ void liberar_lista_cruzada(ListaCruzada* lista) {
 
 // ==================== IMPLEMENTAÇÃO - UNIDADES DE SERVIÇO ====================
 
-// Cria uma nova unidade de serviço
+//Cria uma nova unidade de serviço
 UnidadeServico* criar_unidade(int id, TipoServico tipo, const char* identificacao) {
     UnidadeServico* nova = (UnidadeServico*)malloc(sizeof(UnidadeServico));
     if (!nova) return NULL;
@@ -476,13 +476,13 @@ UnidadeServico* criar_unidade(int id, TipoServico tipo, const char* identificaca
     nova->id = id;
     nova->tipo = tipo;
     strcpy(nova->identificacao, identificacao);
-    nova->disponivel = 1;  // Inicialmente disponível
+    nova->disponivel = 1;  //Inicialmente disponível
     nova->prox = NULL;
     
     return nova;
 }
 
-// Insere uma unidade na lista de unidades
+//Insere uma unidade na lista de unidades
 int inserir_unidade(UnidadeServico** lista, int id, TipoServico tipo, const char* identificacao) {
     UnidadeServico* nova = criar_unidade(id, tipo, identificacao);
     if (!nova) return 0;
@@ -493,7 +493,7 @@ int inserir_unidade(UnidadeServico** lista, int id, TipoServico tipo, const char
     return 1;
 }
 
-// Busca uma unidade disponível do tipo especificado
+//Busca uma unidade disponível do tipo especificado
 UnidadeServico* buscar_unidade_disponivel(UnidadeServico* lista, TipoServico tipo) {
     UnidadeServico* atual = lista;
     
@@ -507,7 +507,7 @@ UnidadeServico* buscar_unidade_disponivel(UnidadeServico* lista, TipoServico tip
     return NULL;
 }
 
-// Retorna string do tipo de serviço
+//Retorna string do tipo de serviço
 const char* tipo_servico_string(TipoServico tipo) {
     switch (tipo) {
         case AMBULANCIA: return "AMBULANCIA";
@@ -517,7 +517,7 @@ const char* tipo_servico_string(TipoServico tipo) {
     }
 }
 
-// Lista todas as unidades cadastradas
+//Lista todas as unidades cadastradas
 void listar_unidades(UnidadeServico* lista) {
     printf("\n=== UNIDADES DE SERVIÇO ===\n");
     UnidadeServico* atual = lista;
@@ -537,7 +537,7 @@ void listar_unidades(UnidadeServico* lista) {
     }
 }
 
-// Libera memória das unidades
+//Libera memória das unidades
 void liberar_unidades(UnidadeServico* lista) {
     while (lista) {
         UnidadeServico* temp = lista;
@@ -548,7 +548,7 @@ void liberar_unidades(UnidadeServico* lista) {
 
 // ==================== IMPLEMENTAÇÃO - FILAS ====================
 
-// Cria uma nova fila
+//Cria uma nova fila
 Fila* criar_fila() {
     Fila* fila = (Fila*)malloc(sizeof(Fila));
     if (!fila) return NULL;
@@ -560,12 +560,12 @@ Fila* criar_fila() {
     return fila;
 }
 
-// Verifica se a fila está vazia
+//Verifica se a fila está vazia
 int fila_vazia(Fila* fila) {
     return fila == NULL || fila->inicio == NULL;
 }
 
-// Adiciona uma ocorrência na fila
+//Adiciona uma ocorrência na fila
 void enfileirar(Fila* fila, Ocorrencia* ocorrencia) {
     if (!fila || !ocorrencia) return;
     
@@ -585,7 +585,7 @@ void enfileirar(Fila* fila, Ocorrencia* ocorrencia) {
     fila->tamanho++;
 }
 
-// Remove e retorna a primeira ocorrência da fila
+//Remove e retorna a primeira ocorrência da fila
 Ocorrencia* desenfileirar(Fila* fila) {
     if (fila_vazia(fila)) return NULL;
     
@@ -603,7 +603,7 @@ Ocorrencia* desenfileirar(Fila* fila) {
     return ocorrencia;
 }
 
-// Mostra o conteúdo da fila
+//Mostra o conteúdo da fila
 void mostrar_fila(Fila* fila) {
     if (fila_vazia(fila)) {
         printf("Fila vazia\n");
@@ -623,7 +623,7 @@ void mostrar_fila(Fila* fila) {
     printf("\n");
 }
 
-// Libera memória da fila
+//Libera memória da fila
 void liberar_fila(Fila* fila) {
     if (!fila) return;
     
@@ -636,7 +636,7 @@ void liberar_fila(Fila* fila) {
 
 // ==================== IMPLEMENTAÇÃO - OCORRÊNCIAS ====================
 
-// Cria uma nova ocorrência
+//Cria uma nova ocorrência
 Ocorrencia* criar_ocorrencia(int id, int bairro_id, TipoServico tipo, int gravidade, int tempo) {
     Ocorrencia* nova = (Ocorrencia*)malloc(sizeof(Ocorrencia));
     if (!nova) return NULL;
@@ -651,9 +651,9 @@ Ocorrencia* criar_ocorrencia(int id, int bairro_id, TipoServico tipo, int gravid
     return nova;
 }
 
-// ==================== IMPLEMENTAÇÃO - ÁRVORE BST (NOVA - FASE 3) ====================
+// ==================== IMPLEMENTAÇÃO - ÁRVORE BST ====================
 
-// Cria uma nova árvore BST
+//Cria uma nova árvore BST
 ArvoreBST* criar_arvore_bst() {
     ArvoreBST* arvore = (ArvoreBST*)malloc(sizeof(ArvoreBST));
     if (!arvore) return NULL;
@@ -664,28 +664,28 @@ ArvoreBST* criar_arvore_bst() {
     return arvore;
 }
 
-// Cria um novo nó para a árvore BST
+//Cria um novo nó para a árvore BST
 NoArvoreBST* criar_no_bst(Ocorrencia* ocorrencia) {
     if (!ocorrencia) return NULL;
     
     NoArvoreBST* novo = (NoArvoreBST*)malloc(sizeof(NoArvoreBST));
     if (!novo) return NULL;
     
-    // Cria uma cópia da ocorrência para evitar problemas de memória
+    //Cria uma cópia da ocorrência para evitar problemas de memória
     novo->ocorrencia = (Ocorrencia*)malloc(sizeof(Ocorrencia));
     if (!novo->ocorrencia) {
         free(novo);
         return NULL;
     }
     
-    *(novo->ocorrencia) = *ocorrencia; // Copia os dados
+    *(novo->ocorrencia) = *ocorrencia; //Copia os dados
     novo->esquerda = NULL;
     novo->direita = NULL;
     
     return novo;
 }
 
-// Insere uma ocorrência na árvore BST (ordenada por ID)
+//Insere uma ocorrência na árvore BST (ordenada por ID)
 int inserir_bst(ArvoreBST* arvore, Ocorrencia* ocorrencia) {
     if (!arvore || !ocorrencia) return 0;
     
@@ -701,7 +701,7 @@ int inserir_bst(ArvoreBST* arvore, Ocorrencia* ocorrencia) {
     NoArvoreBST* atual = arvore->raiz;
     NoArvoreBST* pai = NULL;
     
-    // Busca a posição para inserção
+    //Busca a posição para inserção
     while (atual != NULL) {
         pai = atual;
         if (ocorrencia->id < atual->ocorrencia->id) {
@@ -709,12 +709,12 @@ int inserir_bst(ArvoreBST* arvore, Ocorrencia* ocorrencia) {
         } else if (ocorrencia->id > atual->ocorrencia->id) {
             atual = atual->direita;
         } else {
-            // ID já existe, não insere
+            //ID já existe, não insere
             return 0;
         }
     }
     
-    // Insere o novo nó
+    //Insere o novo nó
     NoArvoreBST* novo = criar_no_bst(ocorrencia);
     if (!novo) return 0;
     
@@ -728,7 +728,7 @@ int inserir_bst(ArvoreBST* arvore, Ocorrencia* ocorrencia) {
     return 1;
 }
 
-// Busca um nó na árvore BST por ID
+//Busca um nó na árvore BST por ID
 NoArvoreBST* buscar_bst(ArvoreBST* arvore, int id) {
     if (!arvore) return NULL;
     
@@ -747,13 +747,13 @@ NoArvoreBST* buscar_bst(ArvoreBST* arvore, int id) {
     return NULL;
 }
 
-// Busca uma ocorrência por ID e retorna a ocorrência
+//Busca uma ocorrência por ID e retorna a ocorrência
 Ocorrencia* buscar_ocorrencia_por_id(ArvoreBST* arvore, int id) {
     NoArvoreBST* no = buscar_bst(arvore, id);
     return no ? no->ocorrencia : NULL;
 }
 
-// Percorre a árvore em ordem (esquerda, raiz, direita)
+//Percorre a árvore em ordem (esquerda, raiz, direita)
 void percorrer_em_ordem_bst(NoArvoreBST* no) {
     if (no != NULL) {
         percorrer_em_ordem_bst(no->esquerda);
@@ -765,7 +765,7 @@ void percorrer_em_ordem_bst(NoArvoreBST* no) {
     }
 }
 
-// Percorre a árvore em pré-ordem (raiz, esquerda, direita)
+//Percorre a árvore em pré-ordem (raiz, esquerda, direita)
 void percorrer_pre_ordem_bst(NoArvoreBST* no) {
     if (no != NULL) {
         printf("ID: %d | Bairro: %d | %s | Gravidade: %d | Tempo: %d\n",
@@ -777,7 +777,7 @@ void percorrer_pre_ordem_bst(NoArvoreBST* no) {
     }
 }
 
-// Percorre a árvore em pós-ordem (esquerda, direita, raiz)
+//Percorre a árvore em pós-ordem (esquerda, direita, raiz)
 void percorrer_pos_ordem_bst(NoArvoreBST* no) {
     if (no != NULL) {
         percorrer_pos_ordem_bst(no->esquerda);
@@ -789,7 +789,7 @@ void percorrer_pos_ordem_bst(NoArvoreBST* no) {
     }
 }
 
-// Mostra informações gerais da árvore BST
+//Mostra informações gerais da árvore BST
 void mostrar_arvore_bst(ArvoreBST* arvore) {
     if (!arvore || !arvore->raiz) {
         printf("Árvore BST vazia\n");
@@ -802,7 +802,7 @@ void mostrar_arvore_bst(ArvoreBST* arvore) {
     percorrer_em_ordem_bst(arvore->raiz);
 }
 
-// Mostra árvore ordenada por ID (em ordem)
+//Mostra árvore ordenada por ID (em ordem)
 void mostrar_arvore_ordenada_por_id(ArvoreBST* arvore) {
     if (!arvore || !arvore->raiz) {
         printf("Nenhuma ocorrência cadastrada na árvore\n");
@@ -813,7 +813,7 @@ void mostrar_arvore_ordenada_por_id(ArvoreBST* arvore) {
     percorrer_em_ordem_bst(arvore->raiz);
 }
 
-// Mostra árvore ordenada por tempo (pré-ordem)
+//Mostra árvore ordenada por tempo (pré-ordem)
 void mostrar_arvore_ordenada_por_tempo(ArvoreBST* arvore) {
     if (!arvore || !arvore->raiz) {
         printf("Nenhuma ocorrência cadastrada na árvore\n");
@@ -824,7 +824,7 @@ void mostrar_arvore_ordenada_por_tempo(ArvoreBST* arvore) {
     percorrer_pre_ordem_bst(arvore->raiz);
 }
 
-// Remove um nó da árvore BST (função auxiliar recursiva)
+//Remove um nó da árvore BST (função auxiliar recursiva)
 NoArvoreBST* remover_bst(NoArvoreBST* no, int id) {
     if (no == NULL) return no;
     
@@ -833,7 +833,7 @@ NoArvoreBST* remover_bst(NoArvoreBST* no, int id) {
     } else if (id > no->ocorrencia->id) {
         no->direita = remover_bst(no->direita, id);
     } else {
-        // Nó encontrado para remoção
+        //Nó encontrado para remoção
         if (no->esquerda == NULL) {
             NoArvoreBST* temp = no->direita;
             free(no->ocorrencia);
@@ -846,23 +846,23 @@ NoArvoreBST* remover_bst(NoArvoreBST* no, int id) {
             return temp;
         }
         
-        // Nó com dois filhos: encontra o sucessor em ordem
+        //Nó com dois filhos: encontra o sucessor em ordem
         NoArvoreBST* temp = no->direita;
         while (temp->esquerda != NULL) {
             temp = temp->esquerda;
         }
         
-        // Copia os dados do sucessor
+        //Copia os dados do sucessor
         *(no->ocorrencia) = *(temp->ocorrencia);
         
-        // Remove o sucessor
+        //Remove o sucessor
         no->direita = remover_bst(no->direita, temp->ocorrencia->id);
     }
     
     return no;
 }
 
-// Remove uma ocorrência da árvore BST
+//Remove uma ocorrência da árvore BST
 int remover_ocorrencia_bst(ArvoreBST* arvore, int id) {
     if (!arvore) return 0;
     
@@ -876,7 +876,7 @@ int remover_ocorrencia_bst(ArvoreBST* arvore, int id) {
     return 0;
 }
 
-// Libera memória da árvore BST (função auxiliar recursiva)
+//Libera memória da árvore BST (função auxiliar recursiva)
 void liberar_arvore_bst(NoArvoreBST* no) {
     if (no != NULL) {
         liberar_arvore_bst(no->esquerda);
@@ -886,7 +886,7 @@ void liberar_arvore_bst(NoArvoreBST* no) {
     }
 }
 
-// Libera toda a árvore BST
+//Libera toda a árvore BST
 void liberar_bst_completa(ArvoreBST* arvore) {
     if (!arvore) return;
     
@@ -894,9 +894,9 @@ void liberar_bst_completa(ArvoreBST* arvore) {
     free(arvore);
 }
 
-// ==================== IMPLEMENTAÇÃO - ÁRVORE AVL PARTE 1 (NOVA - FASE 3) ====================
+// ==================== IMPLEMENTAÇÃO - ÁRVORE AVL PARTE 1 ====================
 
-// Cria uma nova árvore AVL
+//Cria uma nova árvore AVL
 ArvoreAVL* criar_arvore_avl() {
     ArvoreAVL* arvore = (ArvoreAVL*)malloc(sizeof(ArvoreAVL));
     if (!arvore) return NULL;
@@ -907,21 +907,21 @@ ArvoreAVL* criar_arvore_avl() {
     return arvore;
 }
 
-// Cria um novo nó para a árvore AVL
+//Cria um novo nó para a árvore AVL
 NoArvoreAVL* criar_no_avl(Ocorrencia* ocorrencia) {
     if (!ocorrencia) return NULL;
     
     NoArvoreAVL* novo = (NoArvoreAVL*)malloc(sizeof(NoArvoreAVL));
     if (!novo) return NULL;
     
-    // Cria uma cópia da ocorrência
+    //Cria uma cópia da ocorrência
     novo->ocorrencia = (Ocorrencia*)malloc(sizeof(Ocorrencia));
     if (!novo->ocorrencia) {
         free(novo);
         return NULL;
     }
     
-    *(novo->ocorrencia) = *ocorrencia; // Copia os dados
+    *(novo->ocorrencia) = *ocorrencia; //Copia os dados
     novo->altura = 1;
     novo->fator_balanceamento = 0;
     novo->esquerda = NULL;
@@ -930,70 +930,70 @@ NoArvoreAVL* criar_no_avl(Ocorrencia* ocorrencia) {
     return novo;
 }
 
-// Retorna a altura de um nó
+//Retorna a altura de um nó
 int altura_avl(NoArvoreAVL* no) {
     return no ? no->altura : 0;
 }
 
-// Calcula o fator de balanceamento
+//Calcula o fator de balanceamento
 int fator_balanceamento_avl(NoArvoreAVL* no) {
     return no ? altura_avl(no->esquerda) - altura_avl(no->direita) : 0;
 }
 
-// Retorna o maior entre dois inteiros
+//Retorna o maior entre dois inteiros
 int max_int(int a, int b) {
     return (a > b) ? a : b;
 }
 
-// Rotação simples à direita
+//Rotação simples à direita
 NoArvoreAVL* rotacao_direita(NoArvoreAVL* y) {
     NoArvoreAVL* x = y->esquerda;
     NoArvoreAVL* T2 = x->direita;
     
-    // Executa a rotação
+    //Executa a rotação
     x->direita = y;
     y->esquerda = T2;
     
-    // Atualiza as alturas
+    //Atualiza as alturas
     y->altura = max_int(altura_avl(y->esquerda), altura_avl(y->direita)) + 1;
     x->altura = max_int(altura_avl(x->esquerda), altura_avl(x->direita)) + 1;
     
-    // Atualiza fatores de balanceamento
+    //Atualiza fatores de balanceamento
     y->fator_balanceamento = fator_balanceamento_avl(y);
     x->fator_balanceamento = fator_balanceamento_avl(x);
     
     return x;
 }
 
-// Rotação simples à esquerda
+//Rotação simples à esquerda
 NoArvoreAVL* rotacao_esquerda(NoArvoreAVL* x) {
     NoArvoreAVL* y = x->direita;
     NoArvoreAVL* T2 = y->esquerda;
     
-    // Executa a rotação
+    //Executa a rotação
     y->esquerda = x;
     x->direita = T2;
     
-    // Atualiza as alturas
+    //Atualiza as alturas
     x->altura = max_int(altura_avl(x->esquerda), altura_avl(x->direita)) + 1;
     y->altura = max_int(altura_avl(y->esquerda), altura_avl(y->direita)) + 1;
     
-    // Atualiza fatores de balanceamento
+    //Atualiza fatores de balanceamento
     x->fator_balanceamento = fator_balanceamento_avl(x);
     y->fator_balanceamento = fator_balanceamento_avl(y);
     
     return y;
 }
 
-// Insere uma ocorrência na árvore AVL (ordenada por gravidade, depois por ID)
+//Insere uma ocorrência na árvore AVL (ordenada por gravidade, depois por ID)
 NoArvoreAVL* inserir_avl(NoArvoreAVL* no, Ocorrencia* ocorrencia) {
-    // 1. Inserção normal da BST
+    //1. Inserção normal da BST
     if (no == NULL) {
         return criar_no_avl(ocorrencia);
     }
     
-    // Compara primeiro por gravidade (maior gravidade = maior prioridade)
-    // Em caso de empate, compara por ID
+    //Compara primeiro por gravidade (maior gravidade = maior prioridade)
+    //Em caso de empate, compara por ID
     if (ocorrencia->gravidade > no->ocorrencia->gravidade || 
         (ocorrencia->gravidade == no->ocorrencia->gravidade && ocorrencia->id < no->ocorrencia->id)) {
         no->esquerda = inserir_avl(no->esquerda, ocorrencia);
@@ -1001,56 +1001,56 @@ NoArvoreAVL* inserir_avl(NoArvoreAVL* no, Ocorrencia* ocorrencia) {
                (ocorrencia->gravidade == no->ocorrencia->gravidade && ocorrencia->id > no->ocorrencia->id)) {
         no->direita = inserir_avl(no->direita, ocorrencia);
     } else {
-        // Ocorrência duplicada, não insere
+        //Ocorrência duplicada, não insere
         return no;
     }
     
-    // 2. Atualiza altura do nó atual
+    //2. Atualiza altura do nó atual
     no->altura = 1 + max_int(altura_avl(no->esquerda), altura_avl(no->direita));
     
-    // 3. Calcula o fator de balanceamento
+    //3. Calcula o fator de balanceamento
     int balanceamento = fator_balanceamento_avl(no);
     no->fator_balanceamento = balanceamento;
     
-    // 4. Se o nó ficou desbalanceado, executa as rotações necessárias
+    //4. Se o nó ficou desbalanceado, executa as rotações necessárias
     
-    // Caso Esquerda-Esquerda
+    //Caso Esquerda-Esquerda
     if (balanceamento > 1 && (ocorrencia->gravidade > no->esquerda->ocorrencia->gravidade || 
         (ocorrencia->gravidade == no->esquerda->ocorrencia->gravidade && ocorrencia->id < no->esquerda->ocorrencia->id))) {
         return rotacao_direita(no);
     }
     
-    // Caso Direita-Direita
+    //Caso Direita-Direita
     if (balanceamento < -1 && (ocorrencia->gravidade < no->direita->ocorrencia->gravidade || 
         (ocorrencia->gravidade == no->direita->ocorrencia->gravidade && ocorrencia->id > no->direita->ocorrencia->id))) {
         return rotacao_esquerda(no);
     }
     
-    // Caso Esquerda-Direita
+    //Caso Esquerda-Direita
     if (balanceamento > 1 && (ocorrencia->gravidade < no->esquerda->ocorrencia->gravidade || 
         (ocorrencia->gravidade == no->esquerda->ocorrencia->gravidade && ocorrencia->id > no->esquerda->ocorrencia->id))) {
         no->esquerda = rotacao_esquerda(no->esquerda);
         return rotacao_direita(no);
     }
     
-    // Caso Direita-Esquerda
+    //Caso Direita-Esquerda
     if (balanceamento < -1 && (ocorrencia->gravidade > no->direita->ocorrencia->gravidade || 
         (ocorrencia->gravidade == no->direita->ocorrencia->gravidade && ocorrencia->id < no->direita->ocorrencia->id))) {
         no->direita = rotacao_direita(no->direita);
         return rotacao_esquerda(no);
     }
     
-    // Retorna o nó (inalterado)
+    //Retorna o nó (inalterado)
     return no;
 }
 
-// Insere uma ocorrência na árvore AVL
+//Insere uma ocorrência na árvore AVL
 int inserir_avl_arvore(ArvoreAVL* arvore, Ocorrencia* ocorrencia) {
     if (!arvore || !ocorrencia) return 0;
     
     arvore->raiz = inserir_avl(arvore->raiz, ocorrencia);
     
-    // Verifica se a inserção foi bem-sucedida
+    //Verifica se a inserção foi bem-sucedida
     if (arvore->raiz) {
         arvore->tamanho++;
         return 1;
@@ -1059,7 +1059,7 @@ int inserir_avl_arvore(ArvoreAVL* arvore, Ocorrencia* ocorrencia) {
     return 0;
 }
 
-// Busca um nó na árvore AVL por gravidade
+//Busca um nó na árvore AVL por gravidade
 NoArvoreAVL* buscar_avl(NoArvoreAVL* no, int gravidade) {
     if (no == NULL || no->ocorrencia->gravidade == gravidade) {
         return no;
@@ -1072,7 +1072,7 @@ NoArvoreAVL* buscar_avl(NoArvoreAVL* no, int gravidade) {
     return buscar_avl(no->direita, gravidade);
 }
 
-// Busca uma ocorrência por gravidade
+//Busca uma ocorrência por gravidade
 Ocorrencia* buscar_por_gravidade(ArvoreAVL* arvore, int gravidade) {
     if (!arvore) return NULL;
     
@@ -1080,13 +1080,11 @@ Ocorrencia* buscar_por_gravidade(ArvoreAVL* arvore, int gravidade) {
     return no ? no->ocorrencia : NULL;
 }
 
-// ==================== IMPLEMENTAÇÃO - ÁRVORE AVL PARTE 2 (NOVA - FASE 3) ====================
-
-// Percorre a árvore AVL por prioridade (em ordem decrescente de gravidade)
+//Percorre a árvore AVL por prioridade (em ordem decrescente de gravidade)
 void percorrer_por_prioridade(NoArvoreAVL* no) {
     if (no != NULL) {
         percorrer_por_prioridade(no->esquerda);
-        printf("🚨 PRIORIDADE %d | ID: %d | Bairro: %d | %s | Tempo: %d | FB: %d\n",
+        printf("PRIORIDADE %d | ID: %d | Bairro: %d | %s | Tempo: %d | FB: %d\n",
                no->ocorrencia->gravidade, no->ocorrencia->id, no->ocorrencia->bairro_id,
                tipo_servico_string(no->ocorrencia->tipo_servico),
                no->ocorrencia->tempo_chegada, no->fator_balanceamento);
@@ -1094,7 +1092,7 @@ void percorrer_por_prioridade(NoArvoreAVL* no) {
     }
 }
 
-// Mostra informações gerais da árvore AVL
+//Mostra informações gerais da árvore AVL
 void mostrar_arvore_avl(ArvoreAVL* arvore) {
     if (!arvore || !arvore->raiz) {
         printf("Árvore AVL vazia\n");
@@ -1108,7 +1106,7 @@ void mostrar_arvore_avl(ArvoreAVL* arvore) {
     percorrer_por_prioridade(arvore->raiz);
 }
 
-// Mostra ocorrências ordenadas por prioridade
+//Mostra ocorrências ordenadas por prioridade
 void mostrar_ocorrencias_por_prioridade(ArvoreAVL* arvore) {
     if (!arvore || !arvore->raiz) {
         printf("Nenhuma ocorrência cadastrada na árvore de prioridades\n");
@@ -1120,9 +1118,9 @@ void mostrar_ocorrencias_por_prioridade(ArvoreAVL* arvore) {
     percorrer_por_prioridade(arvore->raiz);
 }
 
-// Remove um nó da árvore AVL (função auxiliar recursiva)
+//Remove um nó da árvore AVL (função auxiliar recursiva)
 NoArvoreAVL* remover_avl(NoArvoreAVL* no, int gravidade, int id) {
-    // 1. Remoção normal da BST
+    //1. Remoção normal da BST
     if (no == NULL) return no;
     
     if (gravidade > no->ocorrencia->gravidade || 
@@ -1132,7 +1130,7 @@ NoArvoreAVL* remover_avl(NoArvoreAVL* no, int gravidade, int id) {
                (gravidade == no->ocorrencia->gravidade && id > no->ocorrencia->id)) {
         no->direita = remover_avl(no->direita, gravidade, id);
     } else {
-        // Nó encontrado para remoção
+        //Nó encontrado para remoção
         if ((no->esquerda == NULL) || (no->direita == NULL)) {
             NoArvoreAVL* temp = no->esquerda ? no->esquerda : no->direita;
             
@@ -1149,48 +1147,48 @@ NoArvoreAVL* remover_avl(NoArvoreAVL* no, int gravidade, int id) {
             free(temp->ocorrencia);
             free(temp);
         } else {
-            // Nó com dois filhos: encontra o sucessor em ordem
+            //Nó com dois filhos: encontra o sucessor em ordem
             NoArvoreAVL* temp = no->direita;
             while (temp->esquerda != NULL) {
                 temp = temp->esquerda;
             }
             
-            // Copia os dados do sucessor
+            //Copia os dados do sucessor
             *(no->ocorrencia) = *(temp->ocorrencia);
             
-            // Remove o sucessor
+            //Remove o sucessor
             no->direita = remover_avl(no->direita, temp->ocorrencia->gravidade, temp->ocorrencia->id);
         }
     }
     
     if (no == NULL) return no;
     
-    // 2. Atualiza altura do nó atual
+    //2. Atualiza altura do nó atual
     no->altura = 1 + max_int(altura_avl(no->esquerda), altura_avl(no->direita));
     
-    // 3. Calcula o fator de balanceamento
+    //3. Calcula o fator de balanceamento
     int balanceamento = fator_balanceamento_avl(no);
     no->fator_balanceamento = balanceamento;
     
-    // 4. Se o nó ficou desbalanceado, executa as rotações necessárias
+    //4. Se o nó ficou desbalanceado, executa as rotações necessárias
     
-    // Caso Esquerda-Esquerda
+    //Caso Esquerda-Esquerda
     if (balanceamento > 1 && fator_balanceamento_avl(no->esquerda) >= 0) {
         return rotacao_direita(no);
     }
     
-    // Caso Esquerda-Direita
+    //Caso Esquerda-Direita
     if (balanceamento > 1 && fator_balanceamento_avl(no->esquerda) < 0) {
         no->esquerda = rotacao_esquerda(no->esquerda);
         return rotacao_direita(no);
     }
     
-    // Caso Direita-Direita
+    //Caso Direita-Direita
     if (balanceamento < -1 && fator_balanceamento_avl(no->direita) <= 0) {
         return rotacao_esquerda(no);
     }
     
-    // Caso Direita-Esquerda
+    //Caso Direita-Esquerda
     if (balanceamento < -1 && fator_balanceamento_avl(no->direita) > 0) {
         no->direita = rotacao_direita(no->direita);
         return rotacao_esquerda(no);
@@ -1199,7 +1197,7 @@ NoArvoreAVL* remover_avl(NoArvoreAVL* no, int gravidade, int id) {
     return no;
 }
 
-// Remove uma ocorrência da árvore AVL
+//Remove uma ocorrência da árvore AVL
 int remover_ocorrencia_avl(ArvoreAVL* arvore, int gravidade, int id) {
     if (!arvore) return 0;
     
@@ -1209,7 +1207,7 @@ int remover_ocorrencia_avl(ArvoreAVL* arvore, int gravidade, int id) {
     return 1;
 }
 
-// Libera memória da árvore AVL (função auxiliar recursiva)
+//Libera memória da árvore AVL (função auxiliar recursiva)
 void liberar_arvore_avl(NoArvoreAVL* no) {
     if (no != NULL) {
         liberar_arvore_avl(no->esquerda);
@@ -1219,7 +1217,7 @@ void liberar_arvore_avl(NoArvoreAVL* no) {
     }
 }
 
-// Libera toda a árvore AVL
+//Libera toda a árvore AVL
 void liberar_avl_completa(ArvoreAVL* arvore) {
     if (!arvore) return;
     
@@ -1229,7 +1227,7 @@ void liberar_avl_completa(ArvoreAVL* arvore) {
 
 // ==================== IMPLEMENTAÇÃO - SISTEMA PRINCIPAL ====================
 
-// Inicializa o sistema de emergência (MODIFICADO - FASE 3)
+//Inicializa o sistema de emergência
 SistemaEmergencia* inicializar_sistema() {
     SistemaEmergencia* sistema = (SistemaEmergencia*)malloc(sizeof(SistemaEmergencia));
     if (!sistema) return NULL;
@@ -1244,20 +1242,20 @@ SistemaEmergencia* inicializar_sistema() {
     sistema->fila_ambulancia = criar_fila();
     sistema->fila_bombeiro = criar_fila();
     sistema->fila_policia = criar_fila();
-    sistema->arvore_ocorrencias = criar_arvore_bst(); // NOVA - FASE 3
-    sistema->arvore_prioridades = criar_arvore_avl(); // NOVA - FASE 3
+    sistema->arvore_ocorrencias = criar_arvore_bst(); 
+    sistema->arvore_prioridades = criar_arvore_avl();
     sistema->tempo_atual = 0;
     sistema->proximo_id_ocorrencia = 1;
     
     return sistema;
 }
 
-// Cadastra um bairro no sistema
+//Cadastra um bairro no sistema
 void cadastrar_bairro_sistema(SistemaEmergencia* sistema, int id, const char* nome) {
     if (!sistema) return;
     
     if (inserir_bairro(sistema->bairros, id, nome)) {
-        // Também adiciona na lista cruzada
+        //Também adiciona na lista cruzada
         inserir_bairro_servico(sistema->mapa_cidade, id, nome);
         printf("Bairro cadastrado: ID %d - %s\n", id, nome);
     } else {
@@ -1265,12 +1263,12 @@ void cadastrar_bairro_sistema(SistemaEmergencia* sistema, int id, const char* no
     }
 }
 
-// Cadastra um cidadão no sistema
+//Cadastra um cidadão no sistema
 void cadastrar_cidadao_sistema(SistemaEmergencia* sistema, const char* cpf, const char* nome,
                               const char* email, const char* endereco, int bairro_id) {
     if (!sistema) return;
     
-    // Verifica se o bairro existe
+    //Verifica se o bairro existe
     if (!buscar_bairro(sistema->bairros, bairro_id)) {
         printf("Erro: Bairro ID %d não encontrado!\n", bairro_id);
         return;
@@ -1283,7 +1281,7 @@ void cadastrar_cidadao_sistema(SistemaEmergencia* sistema, const char* cpf, cons
     }
 }
 
-// Cadastra uma unidade no sistema
+//Cadastra uma unidade no sistema
 void cadastrar_unidade_sistema(SistemaEmergencia* sistema, int id, TipoServico tipo, const char* identificacao) {
     if (!sistema) return;
     
@@ -1294,11 +1292,11 @@ void cadastrar_unidade_sistema(SistemaEmergencia* sistema, int id, TipoServico t
     }
 }
 
-// Recebe uma nova ocorrência no sistema (MODIFICADO - FASE 3)
+//Recebe uma nova ocorrência no sistema 
 void receber_ocorrencia(SistemaEmergencia* sistema, int bairro_id, TipoServico tipo, int gravidade) {
     if (!sistema) return;
     
-    // Verifica se o bairro existe
+    //Verifica se o bairro existe
     if (!buscar_bairro(sistema->bairros, bairro_id)) {
         printf("Erro: Bairro ID %d não encontrado!\n", bairro_id);
         return;
@@ -1308,7 +1306,7 @@ void receber_ocorrencia(SistemaEmergencia* sistema, int bairro_id, TipoServico t
                                        bairro_id, tipo, gravidade, 
                                        sistema->tempo_atual);
     
-    // Adiciona na fila correspondente
+    //Adiciona na fila correspondente
     switch (tipo) {
         case AMBULANCIA:
             enfileirar(sistema->fila_ambulancia, nova);
@@ -1324,36 +1322,36 @@ void receber_ocorrencia(SistemaEmergencia* sistema, int bairro_id, TipoServico t
             break;
     }
     
-    // NOVA FUNCIONALIDADE - FASE 3: Adiciona nas árvores para consultas inteligentes
+    //Adiciona nas árvores para consultas inteligentes
     if (inserir_bst(sistema->arvore_ocorrencias, nova)) {
-        printf("✅ Ocorrencia #%d indexada na arvore BST\n", nova->id);
+        printf("Ocorrencia #%d indexada na arvore BST\n", nova->id);
     }
     
     if (inserir_avl_arvore(sistema->arvore_prioridades, nova)) {
-        printf("🚨 Ocorrencia #%d priorizada na arvore AVL (gravidade %d)\n", nova->id, gravidade);
+        printf("Ocorrencia #%d priorizada na arvore AVL (gravidade %d)\n", nova->id, gravidade);
     }
 }
 
-// Processa atendimentos das filas
+//Processa atendimentos das filas
 void processar_atendimentos(SistemaEmergencia* sistema) {
     if (!sistema) return;
     
     printf("\n=== PROCESSANDO ATENDIMENTOS - Tempo %d ===\n", sistema->tempo_atual);
     
-    // Processa fila de ambulâncias
+    //Processa fila de ambulâncias
     if (!fila_vazia(sistema->fila_ambulancia)) {
         UnidadeServico* ambulancia = buscar_unidade_disponivel(sistema->unidades, AMBULANCIA);
         if (ambulancia) {
             Ocorrencia* ocorrencia = desenfileirar(sistema->fila_ambulancia);
-            ambulancia->disponivel = 0;  // Marca como ocupado
+            ambulancia->disponivel = 0;  //Marca como ocupado
             
-            // Adiciona ao histórico
+            //Adiciona ao histórico
             empilhar_historico(sistema->historico_ambulancia, ocorrencia->id, 
                              ocorrencia->bairro_id, ocorrencia->tipo_servico, 
                              ocorrencia->gravidade, sistema->tempo_atual, 
                              sistema->tempo_atual + 2, "Atendimento médico");
             
-            // Atualiza mapa da cidade
+            //Atualiza mapa da cidade
             atualizar_unidades_disponiveis(sistema->mapa_cidade, ocorrencia->bairro_id, AMBULANCIA, -1);
             
             printf("Ambulancia %s atendendo ocorrencia #%d no bairro %d\n", 
@@ -1362,20 +1360,20 @@ void processar_atendimentos(SistemaEmergencia* sistema) {
         }
     }
     
-    // Processa fila de bombeiros
+    //Processa fila de bombeiros
     if (!fila_vazia(sistema->fila_bombeiro)) {
         UnidadeServico* bombeiro = buscar_unidade_disponivel(sistema->unidades, BOMBEIRO);
         if (bombeiro) {
             Ocorrencia* ocorrencia = desenfileirar(sistema->fila_bombeiro);
             bombeiro->disponivel = 0;
             
-            // Adiciona ao histórico
+            //Adiciona ao histórico
             empilhar_historico(sistema->historico_bombeiro, ocorrencia->id, 
                              ocorrencia->bairro_id, ocorrencia->tipo_servico, 
                              ocorrencia->gravidade, sistema->tempo_atual, 
                              sistema->tempo_atual + 3, "Combate a incendio");
             
-            // Atualiza mapa da cidade
+            //Atualiza mapa da cidade
             atualizar_unidades_disponiveis(sistema->mapa_cidade, ocorrencia->bairro_id, BOMBEIRO, -1);
             
             printf("Bombeiro %s atendendo ocorrencia #%d no bairro %d\n", 
@@ -1384,20 +1382,20 @@ void processar_atendimentos(SistemaEmergencia* sistema) {
         }
     }
     
-    // Processa fila de polícia
+    //Processa fila de polícia
     if (!fila_vazia(sistema->fila_policia)) {
         UnidadeServico* policia = buscar_unidade_disponivel(sistema->unidades, POLICIA);
         if (policia) {
             Ocorrencia* ocorrencia = desenfileirar(sistema->fila_policia);
             policia->disponivel = 0;
             
-            // Adiciona ao histórico
+            //Adiciona ao histórico
             empilhar_historico(sistema->historico_policia, ocorrencia->id, 
                              ocorrencia->bairro_id, ocorrencia->tipo_servico, 
                              ocorrencia->gravidade, sistema->tempo_atual, 
                              sistema->tempo_atual + 1, "Atendimento policial");
             
-            // Atualiza mapa da cidade
+            //Atualiza mapa da cidade
             atualizar_unidades_disponiveis(sistema->mapa_cidade, ocorrencia->bairro_id, POLICIA, -1);
             
             printf("Policia %s atendendo ocorrencia #%d no bairro %d\n", 
@@ -1407,19 +1405,19 @@ void processar_atendimentos(SistemaEmergencia* sistema) {
     }
 }
 
-// Simula passagem do tempo
+//Simula passagem do tempo
 void simular_tempo(SistemaEmergencia* sistema, int unidades_tempo) {
     if (!sistema) return;
     
     for (int i = 0; i < unidades_tempo; i++) {
         sistema->tempo_atual++;
         
-        // Libera algumas unidades aleatoriamente (simulação simples)
+        //Libera algumas unidades aleatoriamente (simulação simples)
         UnidadeServico* atual = sistema->unidades;
         while (atual) {
             if (!atual->disponivel && (sistema->tempo_atual % 3 == 0)) {
                 atual->disponivel = 1;
-                // Atualiza mapa da cidade
+                //Atualiza mapa da cidade
                 adicionar_servico_bairro(sistema->mapa_cidade, 1, atual->tipo); // Simula retorno ao centro
                 printf("Unidade %s ficou disponivel\n", atual->identificacao);
             }
@@ -1430,7 +1428,7 @@ void simular_tempo(SistemaEmergencia* sistema, int unidades_tempo) {
     }
 }
 
-// Mostra status geral do sistema
+//Mostra status geral do sistema
 void status_sistema(SistemaEmergencia* sistema) {
     if (!sistema) return;
     
@@ -1449,21 +1447,21 @@ void status_sistema(SistemaEmergencia* sistema) {
     printf("Polícia: ");
     mostrar_fila(sistema->fila_policia);
     
-    // Mostra estatísticas dos históricos
+    //Mostra estatísticas dos históricos
     printf("\n=== ESTATÍSTICAS DE ATENDIMENTO ===\n");
     printf("Ambulâncias - Atendimentos realizados: %d\n", sistema->historico_ambulancia->tamanho);
     printf("Bombeiros - Atendimentos realizados: %d\n", sistema->historico_bombeiro->tamanho);
     printf("Polícia - Atendimentos realizados: %d\n", sistema->historico_policia->tamanho);
     
-    // NOVA - FASE 3: Mostra estatísticas das árvores
+    //Mostra estatísticas das árvores
     printf("\n=== ESTRUTURAS INTELIGENTES (FASE 3) ===\n");
-    printf("🌳 BST - Ocorrências indexadas: %d\n", sistema->arvore_ocorrencias->tamanho);
-    printf("🌲 AVL - Ocorrências priorizadas: %d\n", sistema->arvore_prioridades->tamanho);
+    printf("BST - Ocorrências indexadas: %d\n", sistema->arvore_ocorrencias->tamanho);
+    printf("AVL - Ocorrências priorizadas: %d\n", sistema->arvore_prioridades->tamanho);
     
     printf("==========================================\n");
 }
 
-// Libera toda a memória do sistema (MODIFICADO - FASE 3)
+//Libera toda a memória do sistema
 void liberar_sistema(SistemaEmergencia* sistema) {
     if (!sistema) return;
     
@@ -1477,8 +1475,8 @@ void liberar_sistema(SistemaEmergencia* sistema) {
     liberar_fila(sistema->fila_ambulancia);
     liberar_fila(sistema->fila_bombeiro);
     liberar_fila(sistema->fila_policia);
-    liberar_bst_completa(sistema->arvore_ocorrencias); // NOVA - FASE 3
-    liberar_avl_completa(sistema->arvore_prioridades); // NOVA - FASE 3
+    liberar_bst_completa(sistema->arvore_ocorrencias);
+    liberar_avl_completa(sistema->arvore_prioridades);
     free(sistema);
 }
 
@@ -1503,7 +1501,7 @@ int ler_inteiro(const char* mensagem) {
 void ler_string(const char* mensagem, char* destino, int tamanho) {
     printf("%s", mensagem);
     fgets(destino, tamanho, stdin);
-    // Remove \n do final se existir
+    //Remove \n do final se existir
     destino[strcspn(destino, "\n")] = '\0';
 }
 
@@ -1540,14 +1538,14 @@ void exibir_menu_principal() {
     printf("2. Verificar Dados\n");
     printf("3. Configurar Sistema\n");
     printf("4. Consultas e Históricos\n");
-    printf("5. Consultas com Árvores\n"); // NOVA - FASE 3
+    printf("5. Consultas com Árvores\n");
     printf("0. Fechar Programa\n");
     printf("Escolha uma opcao: ");
 }
 
 // ==================== IMPLEMENTAÇÃO - MENUS DE CONFIGURAÇÃO ====================
 
-// Menu de configuração expandido
+//Menu de configuração expandido
 void menu_configuracao(SistemaEmergencia* sistema) {
     int opcaoConfig;
     do {
@@ -1643,22 +1641,22 @@ void menu_configuracao(SistemaEmergencia* sistema) {
     } while (opcaoConfig != 0);
 }
 
-// Menu de consultas expandido (MODIFICADO - FASE 3)
+//Menu de consultas expandido
 void menu_consultas(SistemaEmergencia* sistema) {
     int opcao;
     do {
         printf("\n=== CONSULTAS E HISTÓRICOS ===\n");
-        printf("🔍 Buscas Básicas:\n");
+        printf("Buscas Básicas:\n");
         printf("1. Buscar Cidadão por CPF\n");
         printf("2. Buscar Bairro por ID\n");
-        printf("\n📋 Históricos:\n");
+        printf("\nHistóricos:\n");
         printf("3. Histórico de Ambulâncias\n");
         printf("4. Histórico de Bombeiros\n");
         printf("5. Histórico da Polícia\n");
-        printf("\n🗺️ Mapas e Estatísticas:\n");
+        printf("\nMapas e Estatísticas:\n");
         printf("6. Mapa Completo da Cidade\n");
         printf("7. Estatísticas Gerais\n");
-        printf("\n🆕 Buscas Inteligentes (Fase 3):\n");
+        printf("\nBuscas Inteligentes (Fase 3):\n");
         printf("8. Busca Rápida por ID (BST)\n");
         printf("9. Consulta por Prioridade (AVL)\n");
         printf("0. Voltar ao menu principal\n");
@@ -1724,27 +1722,27 @@ void menu_consultas(SistemaEmergencia* sistema) {
                                         sistema->historico_bombeiro->tamanho + 
                                         sistema->historico_policia->tamanho);
                 printf("Tempo atual do sistema: %d\n", sistema->tempo_atual);
-                printf("🆕 Ocorrências na BST: %d\n", sistema->arvore_ocorrencias->tamanho);
-                printf("🆕 Ocorrências na AVL: %d\n", sistema->arvore_prioridades->tamanho);
+                printf("Ocorrências na BST: %d\n", sistema->arvore_ocorrencias->tamanho);
+                printf("Ocorrências na AVL: %d\n", sistema->arvore_prioridades->tamanho);
                 break;
             }
-            case 8: { // NOVA - FASE 3
+            case 8: {
                 int id = ler_inteiro("Digite o ID da ocorrência: ");
-                printf("\n🚀 BUSCA INTELIGENTE (BST):\n");
+                printf("\nBUSCA INTELIGENTE (BST):\n");
                 Ocorrencia* ocorrencia = buscar_ocorrencia_por_id(sistema->arvore_ocorrencias, id);
                 if (ocorrencia) {
-                    printf("✅ Encontrada em O(log n)!\n");
+                    printf("Encontrada em O(log n)!\n");
                     printf("ID: %d | Bairro: %d | %s | Gravidade: %d\n",
                            ocorrencia->id, ocorrencia->bairro_id,
                            tipo_servico_string(ocorrencia->tipo_servico),
                            ocorrencia->gravidade);
                 } else {
-                    printf("❌ Ocorrência não encontrada!\n");
+                    printf("Ocorrência não encontrada!\n");
                 }
                 break;
             }
-            case 9: { // NOVA - FASE 3
-                printf("\n🚨 CONSULTA POR PRIORIDADE (AVL):\n");
+            case 9: {
+                printf("\nCONSULTA POR PRIORIDADE (AVL):\n");
                 printf("Ocorrências ordenadas por gravidade:\n");
                 mostrar_ocorrencias_por_prioridade(sistema->arvore_prioridades);
                 break;
@@ -1762,27 +1760,24 @@ void menu_consultas(SistemaEmergencia* sistema) {
     } while (opcao != 0);
 }
 
-// Adicione este include no topo do arquivo emergencia.c se não estiver presente:
-// #include <math.h>
+// ==================== IMPLEMENTAÇÃO - MENU ÁRVORES ====================
 
-// ==================== IMPLEMENTAÇÃO - MENU ÁRVORES (NOVA - FASE 3) ====================
-
-// Menu específico para consultas com árvores
+//Menu específico para consultas com árvores
 void menu_arvores(SistemaEmergencia* sistema) {
     int opcao;
     do {
-        printf("\n=== 🌳 CONSULTAS COM ÁRVORES (FASE 3) ===\n");
-        printf("🔍 Busca Inteligente:\n");
+        printf("\n=== CONSULTAS COM ÁRVORES ===\n");
+        printf("Busca Inteligente:\n");
         printf("1. Buscar Ocorrência por ID (BST)\n");
         printf("2. Listar Todas as Ocorrências por ID (BST)\n");
         printf("3. Consultar por Prioridade (AVL)\n");
         printf("4. Mostrar Estrutura da Árvore BST\n");
         printf("5. Mostrar Estrutura da Árvore AVL\n");
-        printf("\n📊 Operações Avançadas:\n");
+        printf("\nOperações Avançadas:\n");
         printf("6. Remover Ocorrência por ID (BST)\n");
         printf("7. Buscar por Gravidade (AVL)\n");
         printf("8. Estatísticas das Árvores\n");
-        printf("\n🧪 Testes de Performance:\n");
+        printf("\nTestes de Performance:\n");
         printf("9. Teste de Busca Sequencial vs BST\n");
         printf("10. Demonstração de Balanceamento AVL\n");
         printf("0. Voltar ao menu principal\n");
@@ -1797,109 +1792,109 @@ void menu_arvores(SistemaEmergencia* sistema) {
         switch (opcao) {
             case 1: {
                 int id = ler_inteiro("Digite o ID da ocorrência: ");
-                printf("\n🚀 BUSCA INTELIGENTE (BST) - Complexidade O(log n):\n");
+                printf("\nBUSCA INTELIGENTE (BST) - Complexidade O(log n):\n");
                 Ocorrencia* ocorrencia = buscar_ocorrencia_por_id(sistema->arvore_ocorrencias, id);
                 if (ocorrencia) {
-                    printf("✅ Ocorrência encontrada rapidamente!\n");
-                    printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
-                    printf("📋 ID: %d\n", ocorrencia->id);
-                    printf("🏘️  Bairro: %d\n", ocorrencia->bairro_id);
-                    printf("🚨 Serviço: %s\n", tipo_servico_string(ocorrencia->tipo_servico));
-                    printf("⚠️  Gravidade: %d\n", ocorrencia->gravidade);
-                    printf("⏰ Tempo de Chegada: %d\n", ocorrencia->tempo_chegada);
-                    printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+                    printf("Ocorrência encontrada rapidamente!\n");
+                    printf("--------------------------------------------\n");
+                    printf("ID: %d\n", ocorrencia->id);
+                    printf("Bairro: %d\n", ocorrencia->bairro_id);
+                    printf("Serviço: %s\n", tipo_servico_string(ocorrencia->tipo_servico));
+                    printf("Gravidade: %d\n", ocorrencia->gravidade);
+                    printf("Tempo de Chegada: %d\n", ocorrencia->tempo_chegada);
+                    printf("--------------------------------------------\n");
                 } else {
-                    printf("❌ Ocorrência com ID %d não encontrada!\n", id);
+                    printf("Ocorrência com ID %d não encontrada!\n", id);
                 }
                 break;
             }
             case 2:
-                printf("\n📋 TODAS AS OCORRÊNCIAS ORDENADAS POR ID:\n");
+                printf("\nTODAS AS OCORRÊNCIAS ORDENADAS POR ID:\n");
                 mostrar_arvore_ordenada_por_id(sistema->arvore_ocorrencias);
                 break;
             case 3:
-                printf("\n🚨 CONSULTA POR PRIORIDADE (AVL):\n");
+                printf("\nCONSULTA POR PRIORIDADE (AVL):\n");
                 printf("Árvore auto-balanceada para máxima eficiência!\n");
                 mostrar_ocorrencias_por_prioridade(sistema->arvore_prioridades);
                 break;
             case 4:
-                printf("\n🌳 ESTRUTURA COMPLETA DA ÁRVORE BST:\n");
+                printf("\nESTRUTURA COMPLETA DA ÁRVORE BST:\n");
                 mostrar_arvore_bst(sistema->arvore_ocorrencias);
                 break;
             case 5:
-                printf("\n🌲 ESTRUTURA COMPLETA DA ÁRVORE AVL:\n");
+                printf("\nESTRUTURA COMPLETA DA ÁRVORE AVL:\n");
                 mostrar_arvore_avl(sistema->arvore_prioridades);
                 break;
             case 6: {
                 int id = ler_inteiro("Digite o ID da ocorrência para remover: ");
                 if (remover_ocorrencia_bst(sistema->arvore_ocorrencias, id)) {
-                    printf("✅ Ocorrência #%d removida da BST com sucesso!\n", id);
+                    printf("Ocorrência #%d removida da BST com sucesso!\n", id);
                 } else {
-                    printf("❌ Ocorrência #%d não encontrada para remoção!\n", id);
+                    printf("Ocorrência #%d não encontrada para remoção!\n", id);
                 }
                 break;
             }
             case 7: {
                 int gravidade = ler_inteiro("Digite a gravidade para buscar (1-3): ");
                 if (gravidade < 1 || gravidade > 3) {
-                    printf("❌ Gravidade deve estar entre 1 e 3!\n");
+                    printf("Gravidade deve estar entre 1 e 3!\n");
                     break;
                 }
-                printf("\n🔍 BUSCA POR GRAVIDADE %d (AVL):\n", gravidade);
+                printf("\nBUSCA POR GRAVIDADE %d (AVL):\n", gravidade);
                 Ocorrencia* ocorrencia = buscar_por_gravidade(sistema->arvore_prioridades, gravidade);
                 if (ocorrencia) {
-                    printf("✅ Encontrada ocorrência com gravidade %d:\n", gravidade);
+                    printf("Encontrada ocorrência com gravidade %d:\n", gravidade);
                     printf("ID: %d | Bairro: %d | %s\n", 
                            ocorrencia->id, ocorrencia->bairro_id,
                            tipo_servico_string(ocorrencia->tipo_servico));
                 } else {
-                    printf("❌ Nenhuma ocorrência encontrada com gravidade %d!\n", gravidade);
+                    printf("Nenhuma ocorrência encontrada com gravidade %d!\n", gravidade);
                 }
                 break;
             }
             case 8: {
-                printf("\n📊 ESTATÍSTICAS DAS ÁRVORES:\n");
-                printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
-                printf("🌳 BST (Busca por ID):\n");
+                printf("\nESTATÍSTICAS DAS ÁRVORES:\n");
+                printf("--------------------------------------------\n");
+                printf("BST (Busca por ID):\n");
                 printf("   • Ocorrências indexadas: %d\n", sistema->arvore_ocorrencias->tamanho);
                 printf("   • Complexidade de busca: O(log n) médio\n");
                 printf("   • Uso: Consultas rápidas por ID\n\n");
-                printf("🌲 AVL (Priorização):\n");
+                printf("AVL (Priorização):\n");
                 printf("   • Ocorrências priorizadas: %d\n", sistema->arvore_prioridades->tamanho);
                 printf("   • Complexidade de busca: O(log n) garantido\n");
                 printf("   • Uso: Ordenação automática por gravidade\n");
                 printf("   • Balanceamento: Automático\n");
-                printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+                printf("--------------------------------------------\n");
                 break;
             }
             case 9: {
-                printf("\n⚡ TESTE DE PERFORMANCE: Busca Sequencial vs BST\n");
-                printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+                printf("\nTESTE DE PERFORMANCE: Busca Sequencial vs BST\n");
+                printf("--------------------------------------------\n");
                 if (sistema->arvore_ocorrencias->tamanho > 0) {
-                    printf("🔍 Simulando busca em %d ocorrências...\n", sistema->arvore_ocorrencias->tamanho);
-                    printf("📈 Busca Sequencial: O(n) = %d comparações\n", sistema->arvore_ocorrencias->tamanho);
-                    printf("🚀 Busca BST: O(log n) ≈ %.1f comparações\n", 
+                    printf("Simulando busca em %d ocorrências...\n", sistema->arvore_ocorrencias->tamanho);
+                    printf("Busca Sequencial: O(n) = %d comparações\n", sistema->arvore_ocorrencias->tamanho);
+                    printf("Busca BST: O(log n) ≈ %.1f comparações\n", 
                            sistema->arvore_ocorrencias->tamanho > 1 ? 
                            log2(sistema->arvore_ocorrencias->tamanho) : 1.0);
-                    printf("⚡ Melhoria: %.1fx mais rápido!\n", 
+                    printf("Melhoria: %.1fx mais rápido!\n", 
                            sistema->arvore_ocorrencias->tamanho > 1 ? 
                            (float)sistema->arvore_ocorrencias->tamanho / log2(sistema->arvore_ocorrencias->tamanho) : 1.0);
                 } else {
-                    printf("❌ Nenhuma ocorrência cadastrada para teste!\n");
+                    printf("Nenhuma ocorrência cadastrada para teste!\n");
                 }
-                printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+                printf("--------------------------------------------\n");
                 break;
             }
             case 10: {
-                printf("\n🔄 DEMONSTRAÇÃO DE BALANCEAMENTO AVL:\n");
-                printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+                printf("\nDEMONSTRAÇÃO DE BALANCEAMENTO AVL:\n");
+                printf("--------------------------------------------\n");
                 printf("A árvore AVL se rebalanceia automaticamente!\n");
                 printf("Cada nó mostra seu Fator de Balanceamento (FB):\n");
                 printf("• FB = altura(esquerda) - altura(direita)\n");
                 printf("• FB ∈ {-1, 0, 1} garante balanceamento\n");
                 printf("• Rotações automáticas mantêm a eficiência\n\n");
                 mostrar_arvore_avl(sistema->arvore_prioridades);
-                printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+                printf("--------------------------------------------\n");
                 break;
             }
             case 0:
@@ -1917,25 +1912,25 @@ void menu_arvores(SistemaEmergencia* sistema) {
 
 // ==================== IMPLEMENTAÇÃO - SIMULAÇÃO PRINCIPAL ====================
 
-// Função principal de simulação com dados de exemplo
+//Função principal de simulação com dados de exemplo
 void iniciar_simulacao(SistemaEmergencia* sistema) {
-    printf("\n🚀 INICIANDO SIMULAÇÃO COMPLETA DO SISTEMA\n");
-    printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+    printf("\nINICIANDO SIMULAÇÃO COMPLETA DO SISTEMA\n");
+    printf("--------------------------------------------\n");
     
     // ==================== CONFIGURAÇÃO INICIAL ====================
-    printf("\n📋 FASE 1: Configuração Inicial do Sistema\n");
-    printf("──────────────────────────────────────────────────────────\n");
+    printf("\nFASE 1: Configuração Inicial do Sistema\n");
+    printf("--------------------------------------------\n");
     
-    // Cadastra bairros
-    printf("🏘️  Cadastrando bairros...\n");
+    //Cadastra bairros
+    printf("Cadastrando bairros...\n");
     cadastrar_bairro_sistema(sistema, 1, "Centro");
     cadastrar_bairro_sistema(sistema, 2, "Jardim Paulista");
     cadastrar_bairro_sistema(sistema, 3, "Vila Madalena");
     cadastrar_bairro_sistema(sistema, 4, "Ipiranga");
     cadastrar_bairro_sistema(sistema, 5, "Mooca");
     
-    // Cadastra cidadãos
-    printf("\n👥 Cadastrando cidadãos...\n");
+    //Cadastra cidadãos
+    printf("\nCadastrando cidadãos...\n");
     cadastrar_cidadao_sistema(sistema, "111.111.111-11", "João Silva", 
                              "joao@email.com", "Rua das Flores, 123", 1);
     cadastrar_cidadao_sistema(sistema, "222.222.222-22", "Maria Santos", 
@@ -1945,8 +1940,8 @@ void iniciar_simulacao(SistemaEmergencia* sistema) {
     cadastrar_cidadao_sistema(sistema, "444.444.444-44", "Ana Oliveira", 
                              "ana@email.com", "Rua Independência, 321", 4);
     
-    // Cadastra unidades de serviço
-    printf("\n🚑 Cadastrando unidades de emergência...\n");
+    //Cadastra unidades de serviço
+    printf("\nCadastrando unidades de emergência...\n");
     cadastrar_unidade_sistema(sistema, 1, AMBULANCIA, "AMB-01");
     cadastrar_unidade_sistema(sistema, 2, AMBULANCIA, "AMB-02");
     cadastrar_unidade_sistema(sistema, 3, BOMBEIRO, "BOMB-01");
@@ -1954,8 +1949,8 @@ void iniciar_simulacao(SistemaEmergencia* sistema) {
     cadastrar_unidade_sistema(sistema, 5, POLICIA, "POL-01");
     cadastrar_unidade_sistema(sistema, 6, POLICIA, "POL-02");
     
-    // Configura serviços nos bairros
-    printf("\n🗺️  Configurando mapa da cidade...\n");
+    //Configura serviços nos bairros
+    printf("\nConfigurando mapa da cidade...\n");
     for (int i = 1; i <= 5; i++) {
         adicionar_servico_bairro(sistema->mapa_cidade, i, AMBULANCIA);
         adicionar_servico_bairro(sistema->mapa_cidade, i, BOMBEIRO);
@@ -1965,12 +1960,12 @@ void iniciar_simulacao(SistemaEmergencia* sistema) {
     pausar_sistema();
     
     // ==================== SIMULAÇÃO DE OCORRÊNCIAS ====================
-    printf("\n🚨 FASE 2: Simulação de Ocorrências de Emergência\n");
-    printf("──────────────────────────────────────────────────────────\n");
+    printf("\nFASE 2: Simulação de Ocorrências de Emergência\n");
+    printf("--------------------------------------------\n");
     
     printf("Gerando ocorrências de emergência...\n\n");
     
-    // Simula diversas ocorrências com diferentes prioridades
+    //Simula diversas ocorrências com diferentes prioridades
     receber_ocorrencia(sistema, 1, AMBULANCIA, 3);  // Alta prioridade
     receber_ocorrencia(sistema, 2, BOMBEIRO, 2);    // Média prioridade
     receber_ocorrencia(sistema, 3, POLICIA, 1);     // Baixa prioridade
@@ -1980,24 +1975,24 @@ void iniciar_simulacao(SistemaEmergencia* sistema) {
     receber_ocorrencia(sistema, 3, AMBULANCIA, 1);  // Baixa prioridade
     receber_ocorrencia(sistema, 2, POLICIA, 3);     // Alta prioridade
     
-    printf("\n📊 Status das filas após recebimento:\n");
+    printf("\nStatus das filas após recebimento:\n");
     status_sistema(sistema);
     
     pausar_sistema();
     
     // ==================== PROCESSAMENTO E ATENDIMENTOS ====================
-    printf("\n⚡ FASE 3: Processamento Inteligente de Atendimentos\n");
-    printf("──────────────────────────────────────────────────────────\n");
+    printf("\nFASE 3: Processamento Inteligente de Atendimentos\n");
+    printf("--------------------------------------------\n");
     
     printf("Iniciando processamento automático...\n");
     
-    // Simula 5 unidades de tempo
+    //Simula 5 unidades de tempo
     for (int tempo = 1; tempo <= 5; tempo++) {
-        printf("\n🕐 === TEMPO %d ===\n", tempo);
+        printf("\n=== TEMPO %d ===\n", tempo);
         simular_tempo(sistema, 1);
         
         if (tempo == 3) {
-            printf("\n🆘 NOVA EMERGÊNCIA CRÍTICA!\n");
+            printf("\nNOVA EMERGÊNCIA CRÍTICA!\n");
             receber_ocorrencia(sistema, 1, AMBULANCIA, 3);
             receber_ocorrencia(sistema, 4, BOMBEIRO, 3);
         }
@@ -2008,102 +2003,102 @@ void iniciar_simulacao(SistemaEmergencia* sistema) {
     pausar_sistema();
     
     // ==================== DEMONSTRAÇÃO DAS ÁRVORES ====================
-    printf("\n🌳 FASE 4: Consultas Inteligentes com Árvores (FASE 3)\n");
-    printf("──────────────────────────────────────────────────────────\n");
+    printf("\nFASE 4: Consultas Inteligentes com Árvores (FASE 3)\n");
+    printf("--------------------------------------------\n");
     
-    printf("🔍 Demonstrando busca inteligente por ID:\n");
+    printf("Demonstrando busca inteligente por ID:\n");
     mostrar_arvore_bst(sistema->arvore_ocorrencias);
     
-    printf("\n🚨 Demonstrando priorização automática:\n");
+    printf("\nDemonstrando priorização automática:\n");
     mostrar_arvore_avl(sistema->arvore_prioridades);
     
-    // Teste de busca específica
-    printf("\n🎯 Teste de busca rápida:\n");
+    //Teste de busca específica
+    printf("\nTeste de busca rápida:\n");
     Ocorrencia* teste = buscar_ocorrencia_por_id(sistema->arvore_ocorrencias, 1);
     if (teste) {
-        printf("✅ Busca por ID 1: SUCESSO em O(log n)!\n");
+        printf("Busca por ID 1: SUCESSO em O(log n)!\n");
     }
     
     pausar_sistema();
     
     // ==================== RELATÓRIOS FINAIS ====================
-    printf("\n📈 FASE 5: Relatórios e Estatísticas Finais\n");
-    printf("──────────────────────────────────────────────────────────\n");
+    printf("\nFASE 5: Relatórios e Estatísticas Finais\n");
+    printf("--------------------------------------------\n");
     
-    // Mostra históricos
-    printf("📋 Histórico de Ambulâncias:\n");
+    //Mostra históricos
+    printf("Histórico de Ambulâncias:\n");
     mostrar_historico(sistema->historico_ambulancia);
     
-    printf("\n🔥 Histórico de Bombeiros:\n");
+    printf("\nHistórico de Bombeiros:\n");
     mostrar_historico(sistema->historico_bombeiro);
     
-    printf("\n👮 Histórico da Polícia:\n");
+    printf("\nHistórico da Polícia:\n");
     mostrar_historico(sistema->historico_policia);
     
-    // Estatísticas das estruturas avançadas
-    printf("\n🧠 ESTRUTURAS INTELIGENTES:\n");
-    printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
-    printf("🌳 BST - Ocorrências indexadas: %d\n", sistema->arvore_ocorrencias->tamanho);
-    printf("🌲 AVL - Ocorrências priorizadas: %d\n", sistema->arvore_prioridades->tamanho);
-    printf("⚡ Eficiência de busca: O(log n) garantida\n");
-    printf("🔄 Balanceamento: Automático (AVL)\n");
+    //Estatísticas das estruturas avançadas
+    printf("\nESTRUTURAS INTELIGENTES:\n");
+    printf("--------------------------------------------\n");
+    printf("BST - Ocorrências indexadas: %d\n", sistema->arvore_ocorrencias->tamanho);
+    printf("AVL - Ocorrências priorizadas: %d\n", sistema->arvore_prioridades->tamanho);
+    printf("Eficiência de busca: O(log n) garantida\n");
+    printf("Balanceamento: Automático (AVL)\n");
     
-    // Mostra mapa final da cidade
-    printf("\n🗺️  MAPA FINAL DA CIDADE:\n");
+    //Mostra mapa final da cidade
+    printf("\nMAPA FINAL DA CIDADE:\n");
     mostrar_mapa_cidade(sistema->mapa_cidade);
     
-    printf("\n✅ SIMULAÇÃO COMPLETA FINALIZADA COM SUCESSO!\n");
-    printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+    printf("\nSIMULAÇÃO COMPLETA FINALIZADA COM SUCESSO!\n");
+    printf("--------------------------------------------\n");
     printf("📊 Total de atendimentos realizados: %d\n", 
            sistema->historico_ambulancia->tamanho + 
            sistema->historico_bombeiro->tamanho + 
            sistema->historico_policia->tamanho);
-    printf("⏰ Tempo total simulado: %d unidades\n", sistema->tempo_atual);
-    printf("🏆 Sistema funcionando perfeitamente!\n");
+    printf("Tempo total simulado: %d unidades\n", sistema->tempo_atual);
+    printf("Sistema funcionando perfeitamente!\n");
     
     pausar_sistema();
 }
 
 // ==================== IMPLEMENTAÇÃO - VERIFICAÇÃO DE DADOS ====================
 
-// Função para verificar dados do sistema
+//Função para verificar dados do sistema
 void verificar_dados(SistemaEmergencia* sistema) {
-    printf("\n🔍 VERIFICAÇÃO COMPLETA DO SISTEMA\n");
-    printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+    printf("\nVERIFICAÇÃO COMPLETA DO SISTEMA\n");
+    printf("--------------------------------------------\n");
     
-    // Status geral
+    //Status geral
     status_sistema(sistema);
     
-    // Detalhes das estruturas avançadas
-    printf("\n🆕 ESTRUTURAS AVANÇADAS (FASE 3):\n");
-    printf("──────────────────────────────────────────────────────────\n");
+    //Detalhes das estruturas avançadas
+    printf("\nESTRUTURAS AVANÇADAS (FASE 3):\n");
+    printf("--------------------------------------------\n");
     
-    // Verifica árvore BST
+    //Verifica árvore BST
     if (sistema->arvore_ocorrencias->tamanho > 0) {
-        printf("🌳 ÁRVORE BST - Consulta por ID:\n");
+        printf("ÁRVORE BST - Consulta por ID:\n");
         mostrar_arvore_ordenada_por_id(sistema->arvore_ocorrencias);
     } else {
-        printf("🌳 Árvore BST vazia - nenhuma ocorrência cadastrada\n");
+        printf("Árvore BST vazia - nenhuma ocorrência cadastrada\n");
     }
     
     printf("\n");
     
-    // Verifica árvore AVL
+    //Verifica árvore AVL
     if (sistema->arvore_prioridades->tamanho > 0) {
-        printf("🌲 ÁRVORE AVL - Ordenação por Prioridade:\n");
+        printf("ÁRVORE AVL - Ordenação por Prioridade:\n");
         mostrar_ocorrencias_por_prioridade(sistema->arvore_prioridades);
     } else {
-        printf("🌲 Árvore AVL vazia - nenhuma ocorrência priorizada\n");
+        printf("Árvore AVL vazia - nenhuma ocorrência priorizada\n");
     }
     
-    // Mostra mapa da cidade
-    printf("\n🗺️  MAPA DETALHADO DA CIDADE:\n");
+    //Mostra mapa da cidade
+    printf("\nMAPA DETALHADO DA CIDADE:\n");
     mostrar_mapa_cidade(sistema->mapa_cidade);
     
-    // Análise de performance
-    printf("\n⚡ ANÁLISE DE PERFORMANCE:\n");
-    printf("──────────────────────────────────────────────────────────\n");
-    printf("📊 Complexidades de busca:\n");
+    //Análise de performance
+    printf("\nANÁLISE DE PERFORMANCE:\n");
+    printf("--------------------------------------------\n");
+    printf("Complexidades de busca:\n");
     printf("   • Bairros por ID: O(1) - Hash Table\n");
     printf("   • Cidadãos por CPF: O(1) - Hash Table\n");
     printf("   • Ocorrências por ID: O(log n) - BST\n");
@@ -2111,22 +2106,22 @@ void verificar_dados(SistemaEmergencia* sistema) {
     printf("   • Filas de atendimento: O(1) - FIFO\n");
     printf("   • Histórico: O(1) - Pilhas LIFO\n");
     
-    printf("\n🎯 Recomendações:\n");
+    printf("\nRecomendações:\n");
     if (sistema->arvore_ocorrencias->tamanho == 0) {
-        printf("   ⚠️  Execute uma simulação para ver as árvores em ação!\n");
+        printf("Execute uma simulação para ver as árvores em ação!\n");
     } else {
-        printf("   ✅ Sistema com dados suficientes para análise\n");
+        printf("Sistema com dados suficientes para análise\n");
     }
     
     if (sistema->historico_ambulancia->tamanho + 
         sistema->historico_bombeiro->tamanho + 
         sistema->historico_policia->tamanho == 0) {
-        printf("   ⚠️  Nenhum atendimento realizado ainda\n");
+        printf("Nenhum atendimento realizado ainda\n");
     } else {
-        printf("   ✅ Histórico de atendimentos disponível\n");
+        printf("Histórico de atendimentos disponível\n");
     }
     
-    printf("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+    printf("--------------------------------------------\n");
     
     pausar_sistema();
 }
