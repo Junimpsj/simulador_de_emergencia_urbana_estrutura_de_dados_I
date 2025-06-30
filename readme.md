@@ -159,10 +159,6 @@ A simulação automática (Menu 1) demonstra todo o sistema:
 
 ---
 
-## 🏆 Conclusão
-
-Este projeto representa uma implementação completa e funcional de um sistema de emergência urbana, demonstrando com excelência a aplicação prática de estruturas de dados fundamentais. 
-
 **Desenvolvido como projeto acadêmico para Estruturas de Dados I - 2025**
 
 ---
