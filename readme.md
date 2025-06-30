@@ -33,14 +33,14 @@ O sistema foi projetado para demonstrar a aplicação prática de estruturas de 
 
 ## 🚀 Funcionalidades Implementadas
 
-### ✅ Fase 1 - Simulação Básica (Concluída)
+### ✅ Fase 1 - Simulação Básica (Concluída) Finalizado em 03/06/2025
 - **Cadastro de Bairros** usando tabela hash para acesso O(1)
 - **Gerenciamento de Unidades** (ambulâncias, bombeiros, polícia)
 - **Sistema de Filas** separadas por tipo de serviço
 - **Simulação Temporal** com controle de disponibilidade
 - **Interface Interativa** com menus intuitivos
 
-### ✅ Fase 2 - Histórico e Busca Rápida (Concluída)
+### ✅ Fase 2 - Histórico e Busca Rápida (Concluída) Finalizado em 20/06/2025
 - **Histórico de Atendimentos** com pilhas (último atendimento no topo)
 - **Sistema de Busca Rápida** de cidadãos por CPF usando hashing
 - **Mapa da Cidade** com listas cruzadas conectando bairros e serviços
@@ -48,7 +48,7 @@ O sistema foi projetado para demonstrar a aplicação prática de estruturas de 
 - **Consultas Avançadas** e estatísticas em tempo real
 - **Interface Expandida** com menu de consultas e históricos
 
-### ✅ Fase 3 - Busca e Priorização Inteligente (Concluída)
+### ✅ Fase 3 - Busca e Priorização Inteligente (Concluída) Finalizado em 25/06/2025
 - **Consultas inteligentes** com árvores BST para busca por ID
 - **Priorização automática** com árvores AVL balanceadas por gravidade
 - **Menu especializado** para demonstração das árvores
@@ -163,8 +163,7 @@ A simulação automática (Menu 1) demonstra todo o sistema:
 
 Este projeto representa uma implementação completa e funcional de um sistema de emergência urbana, demonstrando com excelência a aplicação prática de estruturas de dados fundamentais. 
 
-**Desenvolvido como projeto acadêmico para Estruturas de Dados I - 2025**  
-*Demonstrando excelência técnica na aplicação de conceitos fundamentais em contexto socialmente relevante*
+**Desenvolvido como projeto acadêmico para Estruturas de Dados I - 2025**
 
 ---
 

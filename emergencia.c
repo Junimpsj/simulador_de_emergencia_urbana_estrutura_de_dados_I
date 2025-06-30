@@ -1454,7 +1454,7 @@ void status_sistema(SistemaEmergencia* sistema) {
     printf("Polícia - Atendimentos realizados: %d\n", sistema->historico_policia->tamanho);
     
     //Mostra estatísticas das árvores
-    printf("\n=== ESTRUTURAS INTELIGENTES (FASE 3) ===\n");
+    printf("\n=== ESTRUTURAS INTELIGENTES ===\n");
     printf("BST - Ocorrências indexadas: %d\n", sistema->arvore_ocorrencias->tamanho);
     printf("AVL - Ocorrências priorizadas: %d\n", sistema->arvore_prioridades->tamanho);
     
@@ -1656,7 +1656,7 @@ void menu_consultas(SistemaEmergencia* sistema) {
         printf("\nMapas e Estatísticas:\n");
         printf("6. Mapa Completo da Cidade\n");
         printf("7. Estatísticas Gerais\n");
-        printf("\nBuscas Inteligentes (Fase 3):\n");
+        printf("\nBuscas Inteligentes:\n");
         printf("8. Busca Rápida por ID (BST)\n");
         printf("9. Consulta por Prioridade (AVL)\n");
         printf("0. Voltar ao menu principal\n");
@@ -1981,7 +1981,7 @@ void iniciar_simulacao(SistemaEmergencia* sistema) {
     pausar_sistema();
     
     // ==================== PROCESSAMENTO E ATENDIMENTOS ====================
-    printf("\nFASE 3: Processamento Inteligente de Atendimentos\n");
+    printf("\nProcessamento Inteligente de Atendimentos\n");
     printf("--------------------------------------------\n");
     
     printf("Iniciando processamento automático...\n");
@@ -2003,7 +2003,7 @@ void iniciar_simulacao(SistemaEmergencia* sistema) {
     pausar_sistema();
     
     // ==================== DEMONSTRAÇÃO DAS ÁRVORES ====================
-    printf("\nFASE 4: Consultas Inteligentes com Árvores (FASE 3)\n");
+    printf("\nFASE 4: Consultas Inteligentes com Árvores\n");
     printf("--------------------------------------------\n");
     
     printf("Demonstrando busca inteligente por ID:\n");
@@ -2049,7 +2049,7 @@ void iniciar_simulacao(SistemaEmergencia* sistema) {
     
     printf("\nSIMULAÇÃO COMPLETA FINALIZADA COM SUCESSO!\n");
     printf("--------------------------------------------\n");
-    printf("📊 Total de atendimentos realizados: %d\n", 
+    printf("Total de atendimentos realizados: %d\n", 
            sistema->historico_ambulancia->tamanho + 
            sistema->historico_bombeiro->tamanho + 
            sistema->historico_policia->tamanho);
@@ -2070,7 +2070,7 @@ void verificar_dados(SistemaEmergencia* sistema) {
     status_sistema(sistema);
     
     //Detalhes das estruturas avançadas
-    printf("\nESTRUTURAS AVANÇADAS (FASE 3):\n");
+    printf("\nESTRUTURAS AVANÇADAS:\n");
     printf("--------------------------------------------\n");
     
     //Verifica árvore BST
