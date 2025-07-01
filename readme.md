@@ -68,11 +68,10 @@ O sistema foi projetado para demonstrar a aplicação prática de estruturas de 
 ## 📁 Estrutura do Projeto
 ```
 📦 emergency-simulator/
-├── 📄 main.c           # Interface principal e fluxo do programa (100 linhas)
-├── 📄 emergencia.h     # Definições de estruturas e protótipos (180 linhas)
-├── 📄 emergencia.c     # Implementação completa (1400+ linhas)
+├── 📄 main.c           # Interface principal e fluxo do programa
+├── 📄 emergencia.h     # Definições de estruturas e protótipos
+├── 📄 emergencia.c     # Implementação completa
 ├── 📄 README.md        # Documentação atualizada do projeto
-└── 📊 Estatísticas     # Total: ~1700 linhas de código
 ```
 
 ## 🎮 Como Usar
@@ -103,11 +102,11 @@ gcc -o simulador main.c emergencia.c -std=c99 -Wall -lm
 
 ### ✅ Todas as Fases Concluídas
 
-| Fase | Prazo | Status | Estruturas Implementadas | Linhas de Código |
-|------|-------|--------|-------------------------|------------------|
-| **Fase 1** | 02/06/2025 | ✅ **Concluída** | Hash Tables, Filas, Listas | ~600 linhas |
-| **Fase 2** | 16/06/2025 | ✅ **Concluída** | Pilhas, Listas Cruzadas | +400 linhas |
-| **Fase 3** | 23/06/2025 | ✅ **Concluída** | Árvore BST, Árvore AVL | +700 linhas |
+| Fase | Prazo | Status | Estruturas Implementadas |
+|------|-------|--------|-------------------------|
+| **Fase 1** | 02/06/2025 | ✅ **Concluída** | Hash Tables, Filas, Listas |
+| **Fase 2** | 16/06/2025 | ✅ **Concluída** | Pilhas, Listas Cruzadas |
+| **Fase 3** | 23/06/2025 | ✅ **Concluída** | Árvore BST, Árvore AVL |
 
 ## 🔬 Demonstração das Estruturas
 
